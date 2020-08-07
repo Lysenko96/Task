@@ -46,9 +46,8 @@ abstract class Cases implements Initiate{
     protected String response_type;
     protected Calendar date_from = new GregorianCalendar();
 
-    protected int search(ArrayList<Query> listQuery,Query query, ArrayList<WaitingTimeline> listWaitingTimeline, LinkedList<String> linkedList){
+    protected int search(ArrayList<Query> listQuery,Query query, ArrayList<WaitingTimeline> listWaitingTimeline, LinkedList<String> linkedList, int countEqual){
 
-        int countEqual = 0;
         listQuery.add(query);
         int allValue = 0;
         int avg = 0;
@@ -184,6 +183,7 @@ class EnterAndShowData {
                 listWaitingTimeline.add(waitingTimeline);
             } else if (inputWords[0].equals("D") && arrayList.size() <= S) {
                 Query query = new Query();
+                int countEqual = 0;
                 for (int j = 0; j < inputWords.length; j++) {
                     String[] listService_id = inputWords[j].split("\\.");
                     if (j == 1) {
@@ -229,7 +229,7 @@ class EnterAndShowData {
                         }
                     }
                 }
-                linkedList.add(String.valueOf(query.search(listQuery, query, listWaitingTimeline, linkedList)));
+                linkedList.add(String.valueOf(query.search(listQuery, query, listWaitingTimeline, linkedList, countEqual)));
             }
         }
         for (int i = 0; i < linkedList.size(); i++) {
