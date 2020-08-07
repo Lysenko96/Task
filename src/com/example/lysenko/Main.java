@@ -75,14 +75,13 @@ final class  WaitingTimeline extends Cases{
 final class Query extends Cases {
     Calendar date_to = new GregorianCalendar();
 
-    @Override
-    public void initDate(String[] listService_id, Cases cases) {
-        int day_from = Integer.parseInt(listService_id[0]);
-        int month_from = Integer.parseInt(listService_id[1]);
-        int year_from = Integer.parseInt(listService_id[2]);
-        this.date_to.set(Calendar.YEAR, year_from);
-        this.date_to.set(Calendar.MONTH, month_from);
-        this.date_to.set(Calendar.DAY_OF_MONTH, day_from);
+    public void initDateTo(String[] listService_id, Query query) {
+        int day_to = Integer.parseInt(listService_id[0]);
+        int month_to = Integer.parseInt(listService_id[1]);
+        int year_to = Integer.parseInt(listService_id[2]);
+        query.date_to.set(Calendar.YEAR, year_to);
+        query.date_to.set(Calendar.MONTH, month_to);
+        query.date_to.set(Calendar.DAY_OF_MONTH, day_to);
     }
 
     void catchException(String[] listService_id, Query query){
@@ -223,7 +222,7 @@ class EnterAndShowData {
                     if (j == 5) {
                         if (inputWords[j].contains(".")) {
                             if (inputWords[j].split("\\.").length == 3) {
-                                query.initDate(listService_id,query);
+                                query.initDateTo(listService_id,query);
                             }
                         } else {
                             System.out.println("enter correct date");
