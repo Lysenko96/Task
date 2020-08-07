@@ -47,7 +47,7 @@ abstract class Cases implements Initiate{
     protected Calendar date_from = new GregorianCalendar();
 
     protected int search(ArrayList<Query> listQuery,Query query, ArrayList<WaitingTimeline> listWaitingTimeline, LinkedList<String> linkedList, int countEqual){
-
+        countEqual = 0;
         listQuery.add(query);
         int allValue = 0;
         int avg = 0;
