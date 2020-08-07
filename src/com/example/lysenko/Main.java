@@ -103,16 +103,16 @@ class EnterAndShowData {
 
         ArrayList<String> delimiter = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("count lines: ");
-        int S = 0;
+        System.out.print("indexRight lines: ");
+        int countLines = 0;
         try {
-            S = Integer.parseInt(reader.readLine());
+            countLines = Integer.parseInt(reader.readLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
         String inputString = "";
-        ArrayList<String> arrayList = new ArrayList<>(S);
-        int count = 1;
+        ArrayList<String> arrayList = new ArrayList<>(countLines);
+        int indexRight = 1;
         while (!reader.equals("")) {
             try {
                 inputString = reader.readLine();
@@ -123,7 +123,7 @@ class EnterAndShowData {
             String[] arrayStr = newInputString.split("\\s");
             if (arrayStr[0].equals("C") || arrayStr[0].equals("D")) {
                 arrayList.add(newInputString);
-                count++;
+                indexRight++;
             } else {
                 if (newInputString.equals(""))
                     break;
@@ -132,29 +132,29 @@ class EnterAndShowData {
         }
         ArrayList<WaitingTimeline> listWaitingTimeline = new ArrayList<>();
         ArrayList<Query> listQuery = new ArrayList<>();
-        for (int i = 0; i < count - 1; i++) {
-            if (i >= S - 1) {
+        for (int indexLeft = 0; indexLeft < indexRight - 1; indexLeft++) {
+            if (indexLeft >= countLines - 1) {
                 delimiter.add("-");
             }
-            String[] inputWords = arrayList.get(i).split("\\s");
-            if (inputWords[0].equals("C") && arrayList.size() <= S) {
+            String[] inputWords = arrayList.get(indexLeft).split("\\s");
+            if (inputWords[0].equals("C") && arrayList.size() <= countLines) {
                 WaitingTimeline waitingTimeline = new WaitingTimeline();
-                for (int j = 0; j < inputWords.length; j++) {
-                    String[] listService_id = inputWords[j].split("\\.");
-                    if (j == 1) {
-                        if (inputWords[j].contains(".")) {
+                for (int indexWordTimeline = 0; indexWordTimeline < inputWords.length; indexWordTimeline++) {
+                    String[] listService_id = inputWords[indexWordTimeline].split("\\.");
+                    if (indexWordTimeline == 1) {
+                        if (inputWords[indexWordTimeline].contains(".")) {
                             waitingTimeline.initService(listService_id,waitingTimeline);
                         } else {
                             int service_id = Integer.parseInt(listService_id[0]);
                             waitingTimeline.service_id = service_id;
                         }
                     }
-                    if (j == 2) {
-                        if (inputWords[j].contains(".")) {
-                            if (inputWords[j].split("\\.").length == 2) {
+                    if (indexWordTimeline == 2) {
+                        if (inputWords[indexWordTimeline].contains(".")) {
+                            if (inputWords[indexWordTimeline].split("\\.").length == 2) {
                                 waitingTimeline.init(listService_id,waitingTimeline);
                             }
-                            if (inputWords[j].split("\\.").length == 3) {
+                            if (inputWords[indexWordTimeline].split("\\.").length == 3) {
                                 waitingTimeline.initQuestionType(listService_id,waitingTimeline);
                             }
                         } else {
@@ -162,68 +162,68 @@ class EnterAndShowData {
                             waitingTimeline.question_type_id = question_type_id;
                         }
                     }
-                    if (j == 3) {
-                        String res_type = inputWords[j];
+                    if (indexWordTimeline == 3) {
+                        String res_type = inputWords[indexWordTimeline];
 
                         waitingTimeline.response_type = res_type;
                     }
-                    if (j == 4) {
-                        if (inputWords[j].contains(".")) {
+                    if (indexWordTimeline == 4) {
+                        if (inputWords[indexWordTimeline].contains(".")) {
 
-                            if (inputWords[j].split("\\.").length == 3) {
+                            if (inputWords[indexWordTimeline].split("\\.").length == 3) {
                                 waitingTimeline.initDate(listService_id,waitingTimeline);
                             }
                         } else {
                             System.out.println("enter correct date");
                         }
                     }
-                    if (j == 5) {
+                    if (indexWordTimeline == 5) {
                         int time = Integer.parseInt(listService_id[0]);
                         waitingTimeline.time = time;
                     }
                 }
                 listWaitingTimeline.add(waitingTimeline);
-            } else if (inputWords[0].equals("D") && arrayList.size() <= S) {
+            } else if (inputWords[0].equals("D") && arrayList.size() <= countLines) {
                 Query query = new Query();
                 int countEqual = 0;
-                for (int j = 0; j < inputWords.length; j++) {
-                    String[] listService_id = inputWords[j].split("\\.");
-                    if (j == 1) {
-                        if (inputWords[j].contains(".")) {
+                for (int indexWordQuery = 0; indexWordQuery < inputWords.length; indexWordQuery++) {
+                    String[] listService_id = inputWords[indexWordQuery].split("\\.");
+                    if (indexWordQuery == 1) {
+                        if (inputWords[indexWordQuery].contains(".")) {
                             query.initService(listService_id,query);
                         } else {
                             int service_id = Integer.parseInt(listService_id[0]);
                             query.service_id = service_id;
                         }
                     }
-                    if (j == 2) {
-                        if (inputWords[j].contains(".")) {
-                            if (inputWords[j].split("\\.").length == 2) {
+                    if (indexWordQuery == 2) {
+                        if (inputWords[indexWordQuery].contains(".")) {
+                            if (inputWords[indexWordQuery].split("\\.").length == 2) {
                                 query.init(listService_id,query);
                             }
-                            if (inputWords[j].split("\\.").length == 3) {
+                            if (inputWords[indexWordQuery].split("\\.").length == 3) {
                                 query.initQuestionType(listService_id,query);
                             }
                         } else {
                             query.catchException(listService_id,query);
                         }
                     }
-                    if (j == 3) {
-                        String res_type = inputWords[j];
+                    if (indexWordQuery == 3) {
+                        String res_type = inputWords[indexWordQuery];
                         query.response_type = res_type;
                     }
-                    if (j == 4) {
-                        if (inputWords[j].contains(".")) {
-                            if (inputWords[j].split("\\.").length == 3) {
+                    if (indexWordQuery == 4) {
+                        if (inputWords[indexWordQuery].contains(".")) {
+                            if (inputWords[indexWordQuery].split("\\.").length == 3) {
                                 query.initDate(listService_id, query);
                             }
                         } else {
                             System.out.println("enter correct date");
                         }
                     }
-                    if (j == 5) {
-                        if (inputWords[j].contains(".")) {
-                            if (inputWords[j].split("\\.").length == 3) {
+                    if (indexWordQuery == 5) {
+                        if (inputWords[indexWordQuery].contains(".")) {
+                            if (inputWords[indexWordQuery].split("\\.").length == 3) {
                                 query.initDateTo(listService_id,query);
                             }
                         } else {
@@ -234,11 +234,11 @@ class EnterAndShowData {
                 linkedList.add(String.valueOf(query.search(listQuery, query, listWaitingTimeline, linkedList, countEqual)));
             }
         }
-        for (int i = 0; i < linkedList.size(); i++) {
-            System.out.println(linkedList.get(i));
+        for (int indexResult = 0; indexResult < linkedList.size(); indexResult++) {
+            System.out.println(linkedList.get(indexResult));
         }
-        for (String w : delimiter) {
-            System.out.println(w);
+        for (String word : delimiter) {
+            System.out.println(word);
         }
     }
 }
