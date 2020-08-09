@@ -76,7 +76,6 @@ abstract class Cases implements Initiate {
 			}
 
 		}
-
 		return avg;
 	}
 }
