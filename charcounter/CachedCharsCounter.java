@@ -15,9 +15,11 @@ public class CachedCharsCounter implements CharsCounter {
 	@Override
 	public Map<Character, Integer> countChar(String text) {
 
-		// Map<Character, Integer> valuesCache = cache.get(text);
+		//Map<Character, Integer> valuesCache = cache.get(text);
 
-		cache.putIfAbsent(text, charsCounter.countChar(text));
+		//System.out.println(cache.get(text));
+
+		cache.put(text, cache.getOrDefault(cache.get(text), charsCounter.countChar(text)));
 
 //		if (valuesCache == null) {
 //			valuesCache = charsCounter.countChar(text);
