@@ -6,17 +6,14 @@ import java.util.Map;
 public class CachedCharsCounter implements CharsCounter {
 
 	private CharsCounter charsCounter;
-	private Map<String, Map<Character, Integer>> cache = new HashMap<>();
+	private Map<String, Map<Character, Long>> cache = new HashMap<>();
 
 	public CachedCharsCounter(CharsCounter charsCounter) {
 		this.charsCounter = charsCounter;
 	}
 
 	@Override
-	public Map<Character, Integer> countChar(String text) {
-
-		cache.put(text, cache.getOrDefault(cache.get(text), charsCounter.countChar(text)));
-
-		return cache.get(text);
+	public Map<Character, Long> countChars(String text) {
+		return cache.computeIfAbsent(text, key -> charsCounter.countChars(text));
 	}
 }

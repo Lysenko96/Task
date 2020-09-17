@@ -9,16 +9,10 @@ import java.util.stream.Stream;
 public class UniqueCharsCounter implements CharsCounter {
 
 	@Override
-	public Map<Character, Integer> countChar(String text) {
-
+	public Map<Character, Long> countChars(String text) {
 		Stream<Character> charactersStream = text.chars().mapToObj(c -> (char) c);
-		Map<Character, Long> longValuesCache = charactersStream.collect(Collectors.groupingBy(Function.identity(),
+		Map<Character, Long> valuesCache = charactersStream.collect(Collectors.groupingBy(Function.identity(),
 				() -> new LinkedHashMap<Character, Long>(), Collectors.counting()));
-
-		Map<Character, Integer> valuesCache = new LinkedHashMap<>();
-		for (Map.Entry<Character, Long> pair : longValuesCache.entrySet()) {
-			valuesCache.put(pair.getKey(), pair.getValue().intValue());
-		}
 		return valuesCache;
 	}
 }
