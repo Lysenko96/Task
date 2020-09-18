@@ -5,10 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-
 
 class UniqueCharsCounterTest {
 
@@ -20,21 +19,17 @@ class UniqueCharsCounterTest {
 	}
 
 	@Test
-	void givenNull_thenCountChars_thenException() {
-		assertThrows(NullPointerException.class, () -> uniqueCharsCounter.countChars(null));
-	}
-
-	@Test
 	void givenEmptyText_thenCountChars_thenEmptyMap() {
 		Map<Character, Long> expectedMap = new HashMap<>();
 
 		Map<Character, Long> actualMap = uniqueCharsCounter.countChars("");
 
-		assertEquals(expectedMap, actualMap);
+		assertEquals(expectedMap, actualMap); 
 	}
 
 	@Test
 	void givenOneWordText_thenCountChars_thenGetMap() {
+
 		Map<Character, Long> expectedMap = new LinkedHashMap<>();
 		expectedMap.put('h', 1l);
 		expectedMap.put('e', 1l);
