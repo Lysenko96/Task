@@ -1,0 +1,70 @@
+package com.lysenko.collections.lists;
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Random rand = new Random(47);
+        List<String> strings = new ArrayList<>();
+        List<String> newStrings = new ArrayList<>();
+        strings.add("fgfgs");
+        strings.add("zdfg");
+        strings.add("cvbc");
+        strings.add("afghf");
+        strings.add("yuiyi");
+        strings.add("opipoio");
+        strings.add("mnmhjm");
+        System.out.println("1: " + strings);
+        String i = new String("s");
+        strings.add(i);
+        System.out.println("2: " + strings);
+        System.out.println("3: " + strings.contains(i));
+        strings.remove(i);
+        String p = strings.get(2);
+        System.out.println("4: " + p + " " + strings.indexOf(p));
+        String cymric = "dd";
+        System.out.println("5: " + strings.indexOf(cymric));
+        System.out.println("6: " + strings.remove(cymric));
+        System.out.println("7: " + strings.remove(p));
+        System.out.println("8 " + strings);
+        strings.add(3, new String("xxd"));
+        System.out.println("9: " + strings);
+        List<String> sub = strings.subList(1, 4);
+        System.out.println("partial list: " + sub);
+        System.out.println("10: " + strings.containsAll(sub));
+        Collections.sort(sub);
+        System.out.println("after sort: " + sub);
+        System.out.println("11: " + strings.containsAll(sub));
+        Collections.shuffle(sub, rand);
+        System.out.println("after shuffle: " + sub);
+        System.out.println("12: " + strings.containsAll(sub));
+        List<String> copy = new ArrayList<>(strings);
+        sub = Arrays.asList(strings.get(1), strings.get(4));
+        System.out.println("sub: " + sub);
+        copy.retainAll(sub);
+        System.out.println("13: " + copy);
+        copy = new ArrayList<>(strings);
+        copy.remove(2);
+        System.out.println("14: " + copy);
+        copy.removeAll(sub);
+        System.out.println("15: " + copy);
+        copy.set(1, new String("sdf"));
+        System.out.println("16:" + copy);
+        copy.addAll(2, sub);
+        System.out.println("17: " + copy);
+        System.out.println("18: " + strings.isEmpty());
+        strings.clear();
+        System.out.println("19: " + strings);
+        System.out.println("20: " + strings.isEmpty());
+        newStrings.add("zxzc");
+        newStrings.add("kljkl");
+        newStrings.add("hgjjh");
+        newStrings.add("rette");
+        strings.addAll(newStrings);
+        System.out.println("21: " + strings);
+        Object[] o = strings.toArray();
+        System.out.println("22: " + o[3]);
+        String[] arrStr = strings.toArray(new String[0]);
+        System.out.println("23: " + arrStr[3]);
+    }
+}
