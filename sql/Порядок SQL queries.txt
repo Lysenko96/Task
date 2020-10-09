@@ -1,0 +1,89 @@
+SELECT <Столбец1>, <Столбец2>, ... <СтолбецN> - выбор столбца/ов
+FROM <Имя_таблицы> - из таблицы
+JOIN-ы  (Соединения дополнительных таблиц) - выбор столба/ов из другой таблицы ON - предикат
+WHERE <Условие/я отбора данных из таблицы> - фильтр OR(или) AND(и) 
+GROUP BY <Признак группировки> 
+HAVING <Условия отбора на основе данных группировки>
+ORDER BY <Столбец1>, ... - сортировка по столбцам desc (обратный порядок сортировки)
+
+
+Для каждого производителя, выпускающего ПК-блокноты 
+c объёмом жесткого диска не менее 10 Гбайт,
+найти скорости таких ПК-блокнотов. Вывод: производитель, скорость.
+
+Select DISTINCT Product.maker, Laptop.speed 
+From Product 
+left join Laptop 
+on Product.model = Laptop.model 
+where Laptop.hd >= 10
+
+Найдите производителя, выпускающего ПК, но не ПК-блокноты.
+
+select product.maker from product where product.type = 'pc'
+except
+select product.maker from product where product.type = 'laptop'
+
+Найдите производителей ПК с процессором не менее 450 Мгц. Вывести: Maker
+
+select DISTINCT product.maker from product join pc on product.model = pc.model 
+where pc.speed >= 450
+
+Найдите модели принтеров, имеющих самую высокую цену. Вывести: model, price
+
+Select printer.model, printer.price 
+from printer 
+where printer.price = (select max(price) from printer)
+
+Найдите среднюю скорость ПК.
+
+Select avg(pc.speed) from pc
+
+Найдите среднюю скорость ПК, выпущенных производителем A.
+
+Select avg(pc.speed) 
+from pc 
+join product 
+on pc.model = product.model 
+where product.maker = 'A'
+
+Найдите размеры жестких дисков, совпадающих у двух и более PC. Вывести: HD
+
+Select pc.hd 
+from pc 
+group by (pc.hd) 
+having count(pc.hd) >= 2
+
+Для каждого производителя, имеющего модели в таблице Laptop, 
+найдите средний размер экрана выпускаемых им ПК-блокнотов.
+Вывести: maker, средний размер экрана.
+
+
+Select product.maker, avg(laptop.screen) 
+from product 
+join laptop 
+on product.model = laptop.model 
+group by (product.maker)
+
+
+Найдите пары моделей PC, имеющих одинаковые скорость и RAM. 
+В результате каждая пара указывается только один раз, т.е. (i,j), но не (j,i), 
+Порядок вывода: модель с большим номером, модель с меньшим номером, скорость и RAM.
+
+
+
+select DISTINCT a.model, b.model, a.speed, a.ram 
+from pc as a, pc as b 
+where a.speed = b.speed and a.model > b.model and a.ram = b.ram
+
+Найдите модели ПК-блокнотов, скорость которых меньше скорости каждого из ПК.
+Вывести: type, model, speed
+
+select DISTINCT product.type, laptop.model, laptop.speed 
+from product, laptop 
+where laptop.speed < all(select pc.speed from pc) and product.type = 'laptop'
+
+
+
+
+
+
