@@ -29,7 +29,8 @@ public class Main {
 	}
 
 }
-@FunctionalInterface 
+
+@FunctionalInterface
 interface ICalculate {
 	double calculate(double x, double y);
 
