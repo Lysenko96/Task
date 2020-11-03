@@ -2,6 +2,7 @@ package edu.lysenko.lambda;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.lang.System.out;
 
 public class Core {
 
@@ -24,17 +25,25 @@ public class Core {
 	}
 
 	void sharingResources() {
-		System.out.println("Sharing resources");
 		if (!processes.isEmpty()) {
+
 			for (Interactive process : processes) {
+
 				if (process != null) {
-					process.manage();
+					out.println("Sharing resources");
+					out.println("PID[" + processes.indexOf(process) + "]");
+					process.manage(process);
+					out.println(process);
+
 				} else {
-					System.out.println("No users");
+					out.println("No process");
 					break;
 				}
+
 			}
+
 		}
+
 	}
 
 }

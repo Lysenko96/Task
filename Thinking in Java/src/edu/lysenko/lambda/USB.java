@@ -7,7 +7,7 @@ public class USB implements Interactive {
 	}
 
 	@Override
-	public void manage() {
+	public void manage(Object handle) {
 		mountUSB();
 	}
 
