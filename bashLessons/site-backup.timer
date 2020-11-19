@@ -1,0 +1,9 @@
+[Unit]
+Description=Backup BindAndDNS - daily
+
+[Timer]
+OnCalendar=*-*-* 5:51:00
+Unit=site-backup.service
+
+[Install]
+WantedBy=multi-user.target
