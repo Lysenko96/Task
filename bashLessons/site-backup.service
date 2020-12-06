@@ -1,0 +1,9 @@
+[Unit]
+Description=Backup BindAndDNS
+
+[Service]
+Type=simple
+ExecStart=/home/gweep/Documets/site-backup.sh
+
+[Install]
+WantedBy=multi-user.target
